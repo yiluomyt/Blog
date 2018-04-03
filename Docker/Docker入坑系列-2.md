@@ -90,9 +90,9 @@ docker run --name demo.flask -d -p 5000:5000 demo:flask
 
 很多时候，我们的应用往往不能完全塞入同一个容器中，比如需要连接数据库的情况，这时候就需要多个容器之间的协调。Docker对此也有一个利器，docker-compose。在默认情况下，docker-compose会随docker一同安装好。这里，我根据网上的教程，简单的说下docker-compose的使用。
 
-### 编写一个基于redies的web应用
+### 编写一个基于redis的web应用
 
-redis是一个内存数据库，可以用来作为应用缓存，这里我们通过redies和flask实现一个统计访问次数的应用。
+redis是一个内存数据库，可以用来作为应用缓存，这里我们通过redis和flask实现一个统计访问次数的应用。
 
 首先，修改之前的WEB应用，加入redis支持。
 
@@ -101,7 +101,7 @@ from flask import Flask
 from redis import Redis
 
 app = Flask(__name__)
-# 注意，此处的host需和docker-compose中redies的service名相同
+# 注意，此处的host需和docker-compose中redis的service名相同
 redis = Redis(host='redis', port=6379)
 
 
