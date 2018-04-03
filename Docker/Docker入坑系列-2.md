@@ -1,0 +1,176 @@
+# Docker入坑系列-1
+
+本篇文章参考了[示例](https://yeasy.gitbooks.io/docker_practice/content/compose/usage.html)。
+
+## 使用Dockerfile创建镜像
+
+### 编写WEB应用
+
+之前，我们直接用官方的MySQL镜像创建了一个MySQL实例，但若想把自己的应用通过Docker部署，那还是需要通过Dockerfile构建自己的镜像。
+
+首先，我们利用python的flask框架建立一个hello world的web应用。
+
+```python
+# app.py
+from flask import Flask
+
+app = Flask(__name__)
+
+
+@app.route('/')
+def hello():
+    return 'Hello, World!'
+
+if __name__ == '__main__':
+    # 默认端口为5000
+    app.run(host='0.0.0.0', debug=True)
+```
+
+在当前目录下，运行`python app.py`即可启动应用。
+
+![docker-2-0](../Images/docker-2-0.png)
+
+然后，我们在浏览器中输入[http://localhost:5000](http://localhost:5000)就能看到熟悉的hello world。
+
+![docker-2-1](../Images/docker-2-1.png)
+
+### 编写Dockfile
+
+在当前目录下，我们先建立一个**Dockerfile**文件，然后键入以下内容。
+
+```Dockerfile
+# 基于python3.6的镜像开始构建
+FROM python:3.6
+# 切换工作目录至/code(可以理解为cd ./code)
+WORKDIR /code
+# 将代码文件添加到镜像的/code目录下
+ADD ./app.py .
+# 安装flask库
+# 这里使用了清华的镜像源，为了安装的快一些
+RUN pip install -i https://pypi.tuna.tsinghua.edu.cn/simple flask
+# 运行
+CMD [ "python", "app.py" ]
+```
+
+随后，启动一个PowerShell窗口，并切换到当前目录下。
+
+```PowerShell
+# 构建镜像
+# -t 表示将该镜像命名为demo，并打上flask的标签
+docker build -t demo:flask .
+```
+
+这边需要注意的是最后还有一个`.`，代表在当前目录下查找**Dockerfile**。
+
+在成功构建之后，我们来启动这个镜像的一个实例。
+
+```PowerShell
+# 启动容器
+# --name 参数将该容器命名为demo.flask，方便后续操作
+# -d 参加将容器切入后台运行，网上的教程也称为守护进程
+# -p 参数将容器内的5000端口，映射到本地的5000端口，使得我们能在本地访问
+docker run --name demo.flask -d -p 5000:5000 demo:flask
+```
+
+至此，一个使用Docker部署的WEB应用就完成了，我们可以通过浏览器访问[http://localhost:5000](http://localhost:5000)看到和之前一样的Hello World界面。
+
+## Docker镜像中有什么？
+
+其实，我也不是特别清楚Docker镜像中到底包含了什么。但我们还是看到在基于python 3.6的镜像上，我们添加了什么。
+
+通过`docker exec -it demo.flask bash`，我们进入容器内部，键入`ls`查看当前目录下的文件。
+
+![docker-2-2](../Images/docker-2-2.png)
+
+我们可以看到的是，进入后的默认目录就是我们在**Dockerfile**中设置的/code，同时，里面有我们添加的app.py文件。
+
+另外，如果有兴趣，还可以再看一下`pip list`里面除了最基础的pip和wheel，其余的就是我们在**Dockerfile**中使用pip安装的库。
+
+## 使用docker-compose编排容器
+
+很多时候，我们的应用往往不能完全塞入同一个容器中，比如需要连接数据库的情况，这时候就需要多个容器之间的协调。Docker对此也有一个利器，docker-compose。在默认情况下，docker-compose会随docker一同安装好。这里，我根据网上的教程，简单的说下docker-compose的使用。
+
+### 编写一个基于redies的web应用
+
+redis是一个内存数据库，可以用来作为应用缓存，这里我们通过redies和flask实现一个统计访问次数的应用。
+
+首先，修改之前的WEB应用，加入redis支持。
+
+```python
+from flask import Flask
+from redis import Redis
+
+app = Flask(__name__)
+# 注意，此处的host需和docker-compose中redies的service名相同
+redis = Redis(host='redis', port=6379)
+
+
+@app.route('/')
+def hello():
+    count = redis.incr('hits')
+    return 'Hello World! 此页面已被访问%d次。\n' % count
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', debug=True)
+```
+
+在**Dockerfile**中，使用pip安装redis库。
+
+```Dockerfile
+FROM python:3.6
+WORKDIR /code
+ADD ./app.py .
+# 修改这里，添加redis库
+RUN pip install -i https://pypi.tuna.tsinghua.edu.cn/simple flask redis
+CMD [ "python", "app.py" ]
+```
+
+自此，一个具有访问次数统计的WEB应用就完成了。。。？
+
+显然，还缺少一步。
+
+### 编写docker-compose.yml
+
+既然提到了docker-compose，那总是要用的。在同一目录下，我们建立一个`docker-compose.yml`，键入以下内容。
+
+```yml
+# 由于一些未知的编码原因，若要复制此段配置文件，请手动去掉注释
+# 声明使用version 3的docker-compose.yml格式
+# 详情可以参考：https://docs.docker.com/compose/compose-file/
+version: '3'
+# 定义有关服务
+services:
+
+  # 使用官方的redis镜像创建redis实例
+  # 注意这里的redis，指的是服务名，需和之前host中的对应
+  # 至于原因，之后再解释
+  redis:
+    image: redis
+
+  # 我们的WEB应用，这里构建为demo:flask-redis镜像
+  web:
+    image: demo:flask-redis
+    build: .
+    # 添加对redis服务的依赖
+    depends_on:
+      - redis
+    # 映射5000端口
+    ports:
+      - 5000:5000
+```
+
+保存后，我们在当前目录下打开PowerShell窗口，执行`docker-compose build`来完成构建。
+
+然后，使用`docker-compose up -d`来启动应用。
+
+访问[http://localhost:5000](http://localhost:5000)可以看到如下界面。
+
+![docker-2-3](../Images/docker-2-3.png)
+
+使用`docker ps`，我们也可以看到两个被启动的容器。
+
+![docker-2-4](../Images/docker-2-4.png)
+
+至此，应该算是完成了吧。。。
+
+另外，补充一条，如果不再需要这两个容器，可以使用`docker-compose down -v`来删除。注意~记得加-v参数，因为redis容器会创建一个数据卷，如果多次使用不删除的话。。emmm。。硬盘大就当我没说。
