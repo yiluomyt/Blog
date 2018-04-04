@@ -2,6 +2,10 @@
 
 本篇文章参考了[示例](https://yeasy.gitbooks.io/docker_practice/content/compose/usage.html)。
 
+> 2018-04-04 更新:
+>
+> 改用基于alpine的镜像，在容量上较默认镜像更小。
+
 ## 使用Dockerfile创建镜像
 
 ### 编写WEB应用
@@ -39,8 +43,8 @@ if __name__ == '__main__':
 在当前目录下，我们先建立一个**Dockerfile**文件，然后键入以下内容。
 
 ```Dockerfile
-# 基于python3.6的镜像开始构建
-FROM python:3.6
+# 基于alpine的python3.6镜像开始构建
+FROM python:alpine3.6
 # 切换工作目录至/code(可以理解为cd ./code)
 WORKDIR /code
 # 将代码文件添加到镜像的/code目录下
@@ -117,7 +121,7 @@ if __name__ == "__main__":
 在**Dockerfile**中，使用pip安装redis库。
 
 ```Dockerfile
-FROM python:3.6
+FROM python:alpine3.6
 WORKDIR /code
 ADD ./app.py .
 # 修改这里，添加redis库
@@ -141,11 +145,11 @@ version: '3'
 # 定义有关服务
 services:
 
-  # 使用官方的redis镜像创建redis实例
+  # 使用官方的alpine版redis镜像创建redis实例
   # 注意这里的redis，指的是服务名，需和之前host中的对应
   # 至于原因，之后再解释
   redis:
-    image: redis
+    image: redis:alpine
 
   # 我们的WEB应用，这里构建为demo:flask-redis镜像
   web:
