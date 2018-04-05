@@ -78,7 +78,7 @@ docker run --name demo.flask -d -p 5000:5000 demo:flask
 
 至此，一个使用Docker部署的WEB应用就完成了，我们可以通过浏览器访问[http://localhost:5000](http://localhost:5000)看到和之前一样的Hello World界面。
 
-## Docker镜像中有什么？
+### Docker镜像中有什么？
 
 其实，我也不是特别清楚Docker镜像中到底包含了什么。但我们还是看到在基于python 3.6的镜像上，我们添加了什么。
 

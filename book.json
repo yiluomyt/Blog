@@ -1,0 +1,16 @@
+{
+    "title": "个人随笔",
+    "author": "yiluomyt",
+    "language": "zh-hans",
+    "links": {
+        "sidebar": {
+            "GitHub Home": "https://github.com/yiluomyt"
+        }
+    },
+    "plugins": [
+        "anchors"
+    ],
+    "pluginsConfig": {
+        
+    }
+}
