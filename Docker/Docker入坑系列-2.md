@@ -149,18 +149,18 @@ services:
   # 注意这里的redis，指的是服务名，需和之前host中的对应
   # 至于原因，之后再解释
   redis:
-    image: redis:alpine
+    image: "redis:alpine"
 
   # 我们的WEB应用，这里构建为demo:flask-redis镜像
   web:
-    image: demo:flask-redis
+    image: "demo:flask-redis"
     build: .
     # 添加对redis服务的依赖
     depends_on:
       - redis
     # 映射5000端口
     ports:
-      - 5000:5000
+      - "5000:5000"
 ```
 
 保存后，我们在当前目录下打开PowerShell窗口，执行`docker-compose build`来完成构建。
