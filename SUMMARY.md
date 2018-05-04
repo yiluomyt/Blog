@@ -10,3 +10,5 @@
 * [Python](Python/README.md)
   * [绘图](Python/绘图.md)
   * [网络结构数据处理](Python/网络结构数据处理.md)
+* [Asp.Net Core](AspnetCore/README.md)
+  * [最简单的CRUD](AspnetCore/最简单的CRUD.md)
