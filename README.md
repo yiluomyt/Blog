@@ -14,8 +14,6 @@
 
     唯一的不便之处就是访问，被墙个人倒是无所谓，但不方便转给他人看。
 
-2. [看云](https://blog.mytyiluo.cn/)
+2. [看云](https://www.kancloud.cn/yiluomyt/blog/content)
 
     国内的源，访问会比Gitbook方便很多，但界面不是很喜。
-
-    另外，该域名还在测试中，现在不一定能访问。
