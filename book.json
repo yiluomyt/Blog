@@ -8,9 +8,13 @@
         }
     },
     "plugins": [
-        "anchors"
+        "anchors",
+        "edit-link"
     ],
     "pluginsConfig": {
-        
+        "edit-link": {
+            "base": "https://github.com/yiluomyt/Blog/edit/master",
+            "label": "在Github上编辑"
+        }
     }
 }
