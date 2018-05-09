@@ -12,3 +12,4 @@
   * [网络结构数据处理](Python/网络结构数据处理.md)
 * [Asp.Net Core](AspnetCore/README.md)
   * [最简单的CRUD](AspnetCore/最简单的CRUD.md)
+  * [Linux部署](AspnetCore/Linux部署.md)
