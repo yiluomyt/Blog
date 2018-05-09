@@ -15,7 +15,7 @@ EF Core随着.net core的版本更新，现在也是到了2.0版本，坑也少�
 
 查询
 
-```C#
+```cs
 // 使用基于Method的LINQ
 var records = _context.Records
     .Where(record   => record.SignInTime >= begin && record.SignInTime <= end)
@@ -36,7 +36,7 @@ Record record = (from r in _context.Records
 
 写入
 
-```c#
+```cs
 // 根据模型数据创建记录
 Record record = new Record
 {
@@ -51,7 +51,7 @@ _context.SaveChanges();
 
 修改
 
-```c#
+```cs
 // 记录签到时间并保存
 record.SignOutTime = DateTime.Now;
 _context.Update(record);
@@ -68,7 +68,7 @@ Doc: [依赖注入](https://docs.microsoft.com/zh-cn/aspnet/core/mvc/controllers
 
 微软的推荐实践是在StartUp.cs的ConfigureServices中添加相关依赖。
 
-```c#
+```cs
 public void ConfigureServices(IServiceCollection services)
 {
     // 添加内存数据库
@@ -81,7 +81,7 @@ public void ConfigureServices(IServiceCollection services)
 
 然后，通过构造函数注入。(当然，在有需要时，也可以在对应函数中注入)
 
-```c#
+```cs
 public RecordController(RecordDbContext context)
 {
     _context = context;

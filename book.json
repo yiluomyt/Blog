@@ -9,12 +9,24 @@
     },
     "plugins": [
         "anchors",
-        "edit-link"
+        "edit-link",
+        "navigator",
+        "-highlight",
+        "prism"
     ],
     "pluginsConfig": {
         "edit-link": {
             "base": "https://github.com/yiluomyt/Blog/edit/master",
             "label": "在Github上编辑"
+        },
+        "prism": {
+            "ignore": [
+                "txt"
+            ],
+            "lang": {
+                "Dockerfile": "docker",
+                "yml": "yaml"
+            }
         }
     }
 }

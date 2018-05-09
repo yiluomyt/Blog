@@ -17,3 +17,5 @@
 2. [看云](https://www.kancloud.cn/yiluomyt/blog/content)
 
     国内的源，访问会比Gitbook方便很多，但界面不是很喜。
+
+    由于精力有限，可能不会太注意看云上的排版，如果有条件的话，建议还是参考Gitbook。

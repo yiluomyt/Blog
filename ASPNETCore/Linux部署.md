@@ -59,7 +59,7 @@ Clone后切到根目录，然后`dotnet public -c Release`指定以生产环境�
 
 解决这个问题也很简单，我们只需在'Program.cs'中添加上以下一行即可。
 
-```c#
+```cs
 public static IWebHost BuildWebHost(string[] args) =>
     WebHost.CreateDefaultBuilder(args)
         .UseStartup<Startup>()
