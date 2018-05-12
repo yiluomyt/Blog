@@ -10,7 +10,7 @@
 
 我所选的配置
 
-![CVM配置](../Images/aspnetcore/Linux部署/CVM配置.png)
+![CVM配置](../Images/ASPNETCore/Linux部署/CVM配置.png)
 
 ## 安全组
 
@@ -20,11 +20,11 @@
 
 1. 新建安全组
 
-    ![新建安全组](../Images/aspnetcore/Linux部署/新建安全组.png)
+    ![新建安全组](../Images/ASPNETCore/Linux部署/新建安全组.png)
 
 2. 添加入站规则
 
-    ![添加入站规则](../Images/aspnetcore/Linux部署/添加入站规则.png)
+    ![添加入站规则](../Images/ASPNETCore/Linux部署/添加入站规则.png)
 
 3. 关联实例
 
@@ -41,18 +41,18 @@
 
 至此，.net core环境已安装完毕，可以通过`dotnet --info`查看相关信息。
 
-![dotnet-info](../Images/aspnetcore/Linux部署/dotnet-info.png)
+![dotnet-info](../Images/ASPNETCore/Linux部署/dotnet-info.png)
 
 ## 发布WEB应用
 
 这里我们就用之前写的[简易版PFSign](https://github.com/panfengstudio/workshop/tree/2018/05/05)作为示例。
 
-Clone后切到根目录，然后`dotnet public -c Release`指定以生产环境发布。
+Clone后切到根目录，然后`dotnet publish -c Release`指定以生产环境发布。
 
 很简单是吗？那就等着报错吧。。
 有兴趣的可以试试，若这样直接上去会在服务器上得到如下提示
 
-![默认不支持IPv6](../Images/aspnetcore/Linux部署/默认不支持IPv6.png)
+![默认不支持IPv6](../Images/ASPNETCore/Linux部署/默认不支持IPv6.png)
 
 在提示中可以看到，'http://localhost:5000' 不能绑定到IPv6。
 > 这是因为localhost代表的是127.0.0.1是一个IPv4地址，自然不能绑定到IPv6的地址上。
@@ -80,7 +80,7 @@ public static IWebHost BuildWebHost(string[] args) =>
 
 回到Putty的命令行界面，用cd指令切到publish文件夹的目录中，运行`dotnet workshop.dll`，这里的workshop.dll是之前发布的应用入口文件。
 
-![启动WEB应用](../Images/aspnetcore/Linux部署/启动WEB应用.png)
+![启动WEB应用](../Images/ASPNETCore/Linux部署/启动WEB应用.png)
 
 至此，应该简单的部署流程就结束了。
 

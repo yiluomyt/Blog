@@ -17,7 +17,7 @@
     "pluginsConfig": {
         "edit-link": {
             "base": "https://github.com/yiluomyt/Blog/edit/master",
-            "label": "在Github上编辑"
+            "label": "编辑此页"
         },
         "prism": {
             "ignore": [
