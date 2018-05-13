@@ -11,6 +11,7 @@
 * [Python](Python/README.md)
   * [绘图](Python/绘图.md)
   * [网络结构数据处理](Python/网络结构数据处理.md)
+  * [线性规划求解](Python/线性规划求解.md)
 * [ASP.NET Core](ASPNETCore/README.md)
   * [最简单的CRUD](ASPNETCore/最简单的CRUD.md)
   * [Linux部署](ASPNETCore/Linux部署.md)
