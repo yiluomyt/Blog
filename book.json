@@ -25,7 +25,8 @@
             ],
             "lang": {
                 "Dockerfile": "docker",
-                "yml": "yaml"
+                "yml": "yaml",
+                "shell": "powershell"
             }
         }
     }

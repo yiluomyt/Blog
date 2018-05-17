@@ -15,3 +15,5 @@
 * [ASP.NET Core](ASPNETCore/README.md)
   * [最简单的CRUD](ASPNETCore/最简单的CRUD.md)
   * [Linux部署](ASPNETCore/Linux部署.md)
+* [Demo](Demo/README.md)
+  * [人脸识别](Demo/人脸识别.md)
