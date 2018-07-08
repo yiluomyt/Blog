@@ -12,8 +12,10 @@ docker pull mysql
 # p参数将Container内部的3306端口（MySQL的默认端口）映射到本地
 # e参数添加环境变量，这里将MySQL的root用户密码设置为password
 # d参数指定该Container在后台允许，即不会在当前命令行中显示输出
-docker run --name demo.mysql -e MYSQL_ROOT_PASSWORD=password -p 3306:3306 -d mysql
+docker run --name demo.mysql -e MYSQL_ROOT_PASSWORD=password -p 3306:3306 -d mysql:5.7
 ```
+
+> 注意指定版本为5.7，最新版本的lastest以更新为8.0，很多地方不兼容。💀
 
 如果一切正常的话，命令行中将只输出Container的ID，同时我们也可以通过`docker ps`命令查看到。
 
