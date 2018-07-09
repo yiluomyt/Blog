@@ -15,7 +15,7 @@ docker pull mysql
 docker run --name demo.mysql -e MYSQL_ROOT_PASSWORD=password -p 3306:3306 -d mysql:5.7
 ```
 
-> 注意指定版本为5.7，最新版本的lastest以更新为8.0，很多地方不兼容。💀
+> 注意指定版本为5.7，最新版本的lastest以更新为8.0，很多地方不兼容。
 
 如果一切正常的话，命令行中将只输出Container的ID，同时我们也可以通过`docker ps`命令查看到。
 
