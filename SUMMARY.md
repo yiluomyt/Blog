@@ -1,22 +1,22 @@
 # Summary
 
 * [Introduction](README.md)
-* [Git](Git/README.md)
+* Git
   * [使用Git写博客](Git/使用Git写博客.md)
 * Web
   * [REST设计原则](Web/REST设计原则.md)
-* [Docker](Docker/README.md)
+* Docker
   * [Docker入坑系列](Docker/Docker入坑系列/README.md)
     * [使用MySQL](Docker/Docker入坑系列/使用MySQL.md)
     * [构建镜像及容器编排](Docker/Docker入坑系列/构建镜像及容器编排.md)
     * [容器化ASP.NET Core应用](Docker/Docker入坑系列/容器化ASPNETCore应用.md)
-* [Python](Python/README.md)
+* Python
   * [绘图](Python/绘图.md)
   * [网络结构数据处理](Python/网络结构数据处理.md)
   * [线性规划求解](Python/线性规划求解.md)
   * Pandas
     * [使用Pandas读取数据](Python/Pandas/使用Pandas读取数据.md)
-* [ASP.NET Core](ASPNETCore/README.md)
+* ASP.NET Core
   * [最简单的CRUD](ASPNETCore/最简单的CRUD.md)
   * [Linux部署](ASPNETCore/Linux部署.md)
 * [Demo](Demo/README.md)
