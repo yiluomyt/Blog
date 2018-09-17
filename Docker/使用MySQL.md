@@ -19,7 +19,7 @@ docker run --name demo.mysql -e MYSQL_ROOT_PASSWORD=password -p 3306:3306 -d mys
 
 如果一切正常的话，命令行中将只输出Container的ID，同时我们也可以通过`docker ps`命令查看到。
 
-![启动MySQL](../../Images/Docker/Docker入坑系列/使用MySQL/启动MySQL.png)
+![启动MySQL](../../Images/Docker/使用MySQL/启动MySQL.png)
 
 如果有更进一步的需要，还可以直接进入Container内部操作（可以视作Lunix环境）。
 
@@ -27,7 +27,7 @@ docker run --name demo.mysql -e MYSQL_ROOT_PASSWORD=password -p 3306:3306 -d mys
 docker exec -it demo.mysql bash
 ```
 
-![MySQL命令行](../../Images/Docker/Docker入坑系列/使用MySQL/MySQL命令行.png)
+![MySQL命令行](../../Images/Docker/使用MySQL/MySQL命令行.png)
 
 ## 关于数据卷
 
@@ -35,7 +35,7 @@ docker exec -it demo.mysql bash
 
 说到这里，想必大家应该都能想到，MySQL这样的数据库应用必然会需要建立数据卷。我们可以用`docker volume ls`来查看一下。
 
-![数据卷](../../Images/Docker/Docker入坑系列/使用MySQL/数据卷.png)
+![数据卷](../../Images/Docker/使用MySQL/数据卷.png)
 
 果然，MySQL镜像在创建实例容器时，会默认创建一个数据卷。
 
@@ -86,7 +86,7 @@ docker run -d --net=cluster --name=ndb2 --ip=192.168.0.4 mysql/mysql-cluster ndb
 docker run -d --net=cluster --name=mysql1 --ip=192.168.0.10 -e MYSQL_ROOT_PASSWORD=password mysql/mysql-cluster mysqld
 ```
 
-![MySQL集群](../../Images/Docker/Docker入坑系列/使用MySQL/MySQL集群.png)
+![MySQL集群](../../Images/Docker/使用MySQL/MySQL集群.png)
 
 此时，MySQL集群就已经启动了，我们可以利用`ndb_mgm`来管理集群。
 
@@ -97,7 +97,7 @@ docker run -it --net=cluster mysql/mysql-cluster ndb_mgm
 
 在显示`ndb_mgm>`后键入`show`就可以看到该集群信息。
 
-![集群信息](../../Images/Docker/Docker入坑系列/使用MySQL/集群信息.png)
+![集群信息](../../Images/Docker/使用MySQL/集群信息.png)
 
 ## 使用Docker Compose创建
 

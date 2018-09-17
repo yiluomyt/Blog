@@ -21,7 +21,7 @@ dotnet run
 
 打开浏览器键入[http://localhost:5000/api/values](http://localhost:5000/api/values)，我们可以看到返回的样例。
 
-![docker-3-0](../../Images/Docker/Docker入坑系列/容器化ASPNETCore应用/api样例.png)
+![docker-3-0](../../Images/Docker/容器化ASPNETCore应用/api样例.png)
 
 显然，和之前的python应用不同，.net core需要经过build才能运行。为了方便build，微软官方也推出了一个build用的镜像`microsoft/aspnetcore-build`。
 
