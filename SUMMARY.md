@@ -5,6 +5,7 @@
   * [使用Git写博客](Other/使用Git写博客.md)
   * [REST设计原则](Other/REST设计原则.md)
   * [人脸识别](Other/人脸识别.md)
+  * [seafile服务器迁移](Other/seafile服务器迁移.md)
 * Python
   * [绘图](Python/绘图.md)
   * [网络结构数据处理](Python/网络结构数据处理.md)

@@ -10,7 +10,6 @@
     "plugins": [
         "anchors",
         "edit-link",
-        "navigator",
         "-highlight",
         "prism"
     ],
