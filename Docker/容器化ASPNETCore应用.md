@@ -1,5 +1,9 @@
 # 容器化ASP.NET Core应用
 
+> 最新版的.NET Core镜像已迁移到microsoft/dotnet的仓库下。
+>
+> 有空再更新下最新的用法。（暗示要咕
+
 本文参考了[示例](https://docs.docker.com/engine/examples/dotnetcore/)。
 
 ## 最简单的Web API应用
