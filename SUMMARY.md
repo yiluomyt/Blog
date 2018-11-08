@@ -6,6 +6,8 @@
   * [REST设计原则](Other/REST设计原则.md)
   * [人脸识别](Other/人脸识别.md)
   * [seafile服务器迁移](Other/seafile服务器迁移.md)
+  * [图像锐化](Other/图像锐化.md)
+  * [数字图像水印](Other/数字图像水印.md)
 * Python
   * [绘图](Python/绘图.md)
   * [网络结构数据处理](Python/网络结构数据处理.md)

@@ -8,6 +8,7 @@
         }
     },
     "plugins": [
+        "mathjax",
         "anchors",
         "edit-link",
         "-highlight",
