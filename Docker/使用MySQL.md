@@ -63,6 +63,27 @@ docker volume rm $(docker volume ls -q)
 
 其中的第一部分可以列出所有数据卷的Id，然后将值传给第二个命令，即起到了删除所有数据卷的作用。
 
+## 关于数据库字符集
+
+在实际使用MySQL的过程中，我们会更多的使用utf-8，而不是默认字符集。这里需要注意，MySQL的utf-8字符集并不是真正的utf-8，utf8mb4才是真正的4字节的utf-8。我们这里可以通过挂载配置文件来实现修改字符集。
+
+首先，我们建立一个`charset.cfg`文件，配置如下：
+
+```ini
+[client]
+default-character-set = utf8mb4
+
+[mysql]
+default-character-set = utf8mb4
+
+[mysqld]
+character-set-client-handshake = FALSE
+character-set-server = utf8mb4
+collation-server = utf8mb4_unicode_ci
+```
+
+在启动mysql容器时，我们可以将该文件挂载到`/etc/mysql/conf.d`路径下，使其在能够自动加载，例如`-v ./charset.cnf:/etc/mysql/conf.d/charset.cnf`。
+
 ## 创建MySQL集群
 
 如果觉得只是启动一个MySQL体现不出Docker的优势，那么这边我们来试着用Docker创建一个MySQL集群。
