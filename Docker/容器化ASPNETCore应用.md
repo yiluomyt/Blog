@@ -1,10 +1,6 @@
 # 容器化ASP.NET Core应用
 
-> 最新版的.NET Core镜像已迁移到microsoft/dotnet的仓库下。
->
-> 有空再更新下最新的用法。（暗示要咕
-
-本文参考了[示例](https://docs.docker.com/engine/examples/dotnetcore/)。
+> 2018/11/16 更新ASP.NET Core 2.1的容器化
 
 ## 最简单的Web API应用
 
@@ -27,36 +23,49 @@ dotnet run
 
 ![docker-3-0](../../Images/Docker/容器化ASPNETCore应用/api样例.png)
 
-显然，和之前的python应用不同，.net core需要经过build才能运行。为了方便build，微软官方也推出了一个build用的镜像`microsoft/aspnetcore-build`。
+显然，和之前的python应用不同，.net core需要经过build才能运行。因此，我们可以先拉取完整的SDK镜像`microsoft/dotnet:2.1-sdk`来进行编译，以免因为在不同环境下build产生的问题。而在实际运行过程中，考虑到镜像容量以及运行时优化，我们应该采用专门的runtime镜像`microsoft/dotnet:2.1-aspnetcore-runtime`。
 
-这里，参考示例，我们利用`microsoft/aspnetcore-build`来build应用，并将输出复制到`microsoft/aspnetcore`中来运行。
+根据以上两个要求，我们可以给出以下Dockerfile（其实基本就是VS自动生成的）
+> 因为一些原因需要使用`DateTime.Now`，这里将最终镜像的时区设置为了Asia/Shanghai，若不需要，将倒数2/3行删去即可。
 
 ```Dockerfile
-# build镜像
-FROM microsoft/aspnetcore-build AS build-env
+# 拉取runtime镜像
+FROM microsoft/dotnet:2.1-aspnetcore-runtime AS base
+# 限定工作目录
 WORKDIR /app
+# 开放80端口
+EXPOSE 80
 
-# 还原Nuget包
-COPY *.csproj ./
+# 拉取SDK镜像
+FROM microsoft/dotnet:2.1-sdk AS build
+WORKDIR /src
+# 复制项目文件
+COPY ["aspnetapp.csproj", "."]
+# 还原项目(restore nuget package)
 RUN dotnet restore
+# 将剩余代码复制到容器中
+COPY . .
+# 以Release模式编译项目
+RUN dotnet build -c Release -o /app
 
-# 复制所有文件
-COPY . ./
-# 发布应用
-RUN dotnet publish -c Release -o out
+# 发布项目
+FROM build AS publish
+RUN dotnet publish -c Release -o /app
 
-# 运行镜像
-FROM microsoft/aspnetcore
+FROM base AS final
 WORKDIR /app
-# 从build镜像中复制输出
-COPY --from=build-env /app/out .
-# 设置入口
-ENTRYPOINT [ "dotnet", "aspnetapp.dll" ]
+# 复制发布后的文件
+COPY --from=publish /app .
+# 设置时区
+ENV TZ=Asia/Shanghai
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+# 设置容器入口
+ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 ```
 
-然后，就是`docker build`了？不，在这里我们还要多加一步，因为之前我们已经在本地运行过了，.net core会在当前目录下创建**/bin**和**/obj**来储存二进制文件和中间文件，而这部分在我们构建镜像时是不需要的，我们可以通过**.dockerignore**来忽略他们（就和**.gitignore**一样）。
+然后，就是`docker build`了？不，在这里我们还要多加一步，因为之前我们已经在本地运行过了，.net core会在当前目录下创建/bin和/obj来储存二进制文件和中间文件，而这部分在我们构建镜像时是不需要的，我们可以通过`.dockerignore`来忽略他们（就和.gitignore一样）。
 
-在当前目录下，创建一个**.dockerignore**文件，键入以下内容。
+在当前目录下，创建一个`.dockerignore`文件，键入以下内容。
 
 ```txt
 /bin
@@ -65,4 +74,4 @@ ENTRYPOINT [ "dotnet", "aspnetapp.dll" ]
 
 最后，就是我们熟悉的`docker build -t demo:aspnetapp .`。但注意在build结束后，你会发现除了我们指定生成的demo:aspnetapp镜像外还有一个`<none>:<none>`的dangling镜像，这个镜像就是我们在**Dockerfile**前半部分中用的build环境，如果觉得不再需要了，可以通过`docker image prune`来删除所有dangling镜像。
 
-最后的最后，注意一个细节。。也不清楚microsoft/aspnetcore中的环境是怎么配置的，按照以上步骤生成的镜像在运行时监听的是80端口。所以，在启动实例时，记得用`-p 80:80`来映射80端口。
+最后的最后，注意一个细节。。即使在Dockerfile中EXPOSE了80端口，在`docker run`的命令中，还是需要通过`-p 80:80`来映射到宿主机。
