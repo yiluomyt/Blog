@@ -4,6 +4,7 @@
 * [杂谈](Other/README.md)
   * [使用Git写博客](Other/使用Git写博客.md)
   * [REST设计原则](Other/REST设计原则.md)
+  * [Swagger导出API](Other/Swagger导出API.md)
   * [人脸识别](Other/人脸识别.md)
   * [seafile服务器迁移](Other/seafile服务器迁移.md)
   * [图像锐化](Other/图像锐化.md)
