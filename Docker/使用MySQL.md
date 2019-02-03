@@ -4,7 +4,7 @@
 
 对我个人来说，使用Docker的最大需求就是可以简化一些应用的安装，特别是数据库之类的－_－b。所以，使用Docker的第一个Demo就是启动一个MySQL实例。
 
-```powershell
+```shell
 # 拉取MySQL镜像
 docker pull mysql
 # 启动MySQL实例
@@ -23,7 +23,7 @@ docker run --name demo.mysql -e MYSQL_ROOT_PASSWORD=password -p 3306:3306 -d mys
 
 如果有更进一步的需要，还可以直接进入Container内部操作（可以视作Lunix环境）。
 
-```powershell
+```shell
 docker exec -it demo.mysql bash
 ```
 
@@ -48,7 +48,7 @@ docker exec -it demo.mysql bash
 
 当然，对于已经存在的且不再需要的数据卷，我们也可以通过以下方式来删除。
 
-```powershell
+```shell
 # 删除某个数据卷
 docker volume rm bb338dbf12e4fff1deae0260ab55089a53555a6e340ae2d2f823920e7be3d725a
 # 删除所有数据卷
@@ -94,7 +94,7 @@ collation-server = utf8mb4_unicode_ci
 
 因为官方文档已经讲的挺详细的了，所以这边只是单纯的题一下。
 
-```PowerShell
+```shell
 # 创建一个内部网络,命名为cluster
 docker network create cluster --subnet=192.168.0.0/16
 # 创建MySQL管理节点
@@ -111,7 +111,7 @@ docker run -d --net=cluster --name=mysql1 --ip=192.168.0.10 -e MYSQL_ROOT_PASSWO
 
 此时，MySQL集群就已经启动了，我们可以利用`ndb_mgm`来管理集群。
 
-```PowerShell
+```shell
 # 进入交互式的管理命令行
 docker run -it --net=cluster mysql/mysql-cluster ndb_mgm
 ```

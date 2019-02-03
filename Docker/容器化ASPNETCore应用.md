@@ -8,7 +8,7 @@
 
 首先，我们利用dotnet CLI工具创建一个新的Web API应用，并在本地测试一下。
 
-```PowerShell
+```shell
 # 新建项目
 dotnet new webapi -o aspnetapp
 # 切换目录
