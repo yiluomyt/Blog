@@ -22,6 +22,7 @@
 * [ABP框架入门踩坑](ABP框架入门踩坑/README.md)
   * [使用MySQL](ABP框架入门踩坑/使用MySQL.md)
   * [配置User Secrets](ABP框架入门踩坑/配置UserSecrets.md)
+  * [配置数据库表前缀](ABP框架入门踩坑/配置数据库表前缀.md)
 * Docker
   * [使用MySQL](Docker/使用MySQL.md)
   * [构建镜像及容器编排](Docker/构建镜像及容器编排.md)
