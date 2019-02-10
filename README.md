@@ -27,7 +27,7 @@ Gitbook算是个人比较喜欢的网站，使用也挺方便。
   - [ ] 添加微信登录
   - [ ] 定制Swagger UI
 - [x] Hexo简单上手
-- [ ] 使用Git子模块管理Hexo博客
+- [x] 使用Git子模块管理Hexo博客
 - [ ] Netlify上手体验
 - [ ] nuxt快速上手
 - [ ] 无服务器函数上手体验

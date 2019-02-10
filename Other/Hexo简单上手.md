@@ -85,15 +85,21 @@ var posts = locals.posts.data.sort(
 
 通过查找资料，我们可以在`layout/_custom/head.swig`中添加如下信息来定义元数据：
 
+{% raw %}
+
 ```html
 <meta itemprop="name" content="{{ page.title | default(title) }}"/>
 <meta itemprop="image" content="{{ url_for('/uploads/logo-white.png') }}" />
 <meta name="description" itemprop="description" content="{{ truncate(strip_html(page.excerpt), {length: 20}) | default(description) }}" />
 ```
 
+{% endraw %}
+
 其中所涉及到的变量可以在[文档](https://hexo.io/zh-cn/api/locals)中找到。
 
 然后，我们需要转到`layout/_layout.swig`文件，修改如下内容：
+
+{% raw %}
 
 ```html
 <html class="{{ html_class | lower }}" lang="{{ config.language }}">
@@ -106,5 +112,7 @@ var posts = locals.posts.data.sort(
   {{ partial('_scripts/noscript.swig', {}, {cache: theme.cache.enable}) }}
 </head>
 ```
+
+{% endraw %}
 
 > 在`hexo g`命令中，hexo会对部分内容做缓存处理，而`hexo s`不会，这点坑了我不少时间。
