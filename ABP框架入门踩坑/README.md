@@ -37,3 +37,5 @@
 
 - [使用MySQL](使用MySQL.md)
 - [配置User Secrets](配置UserSecrets.md)
+- [配置数据库表前缀](配置数据库表前缀.md)
+- [添加实体](添加实体.md)
