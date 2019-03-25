@@ -26,7 +26,8 @@
             "lang": {
                 "Dockerfile": "docker",
                 "yml": "yaml",
-                "shell": "powershell"
+                "shell": "powershell",
+                "conf": "nginx"
             }
         }
     }
