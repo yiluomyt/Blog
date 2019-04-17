@@ -1,7 +1,6 @@
 ---
 tags:
   - Docker
-  - seafile
   - Linux
 date: 2018-09-24
 ---
