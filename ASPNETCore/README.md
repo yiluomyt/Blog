@@ -1,5 +1,7 @@
-# Asp.Net Core
+# ASP.NET Core
 
-无限踩坑中。。。
+![dotnet](https://dotnet.microsoft.com/images/redesign/shared/platform.svg?v=1AekG8sFoRFIXTRNH81pNfUInvmmA-ouVdZ3XwmpqlE)
 
-当前使用版本 .net Core 2.0
+> .NET is a free, cross-platform, open source developer platform for building many different types of applications.
+>
+> With .NET, you can use multiple languages, editors, and libraries to build for web, mobile, desktop, gaming, and IoT.

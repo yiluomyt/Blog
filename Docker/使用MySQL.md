@@ -22,11 +22,11 @@ docker pull mysql
 docker run --name demo.mysql -e MYSQL_ROOT_PASSWORD=password -p 3306:3306 -d mysql:5.7
 ```
 
-> 注意指定版本为 5.7，最新版本的 lastest 以更新为 8.0，很多地方不兼容。
+**注意指定版本为 5.7，最新版本的 lastest 以更新为 8.0，很多地方不兼容。**
 
 如果一切正常的话，命令行中将只输出 Container 的 ID，同时我们也可以通过`docker ps`命令查看到。
 
-![启动MySQL](../../Images/Docker/使用MySQL/启动MySQL.png)
+![启动MySQL](../Images/Docker/使用MySQL/启动MySQL.png)
 
 如果有更进一步的需要，还可以直接进入 Container 内部操作（可以视作 Lunix 环境）。
 
@@ -34,7 +34,7 @@ docker run --name demo.mysql -e MYSQL_ROOT_PASSWORD=password -p 3306:3306 -d mys
 docker exec -it demo.mysql bash
 ```
 
-![MySQL命令行](../../Images/Docker/使用MySQL/MySQL命令行.png)
+![MySQL命令行](../Images/Docker/使用MySQL/MySQL命令行.png)
 
 ## 关于数据卷
 
@@ -42,7 +42,7 @@ docker exec -it demo.mysql bash
 
 说到这里，想必大家应该都能想到，MySQL 这样的数据库应用必然会需要建立数据卷。我们可以用`docker volume ls`来查看一下。
 
-![数据卷](../../Images/Docker/使用MySQL/数据卷.png)
+![数据卷](../Images/Docker/使用MySQL/数据卷.png)
 
 果然，MySQL 镜像在创建实例容器时，会默认创建一个数据卷。
 
@@ -114,7 +114,7 @@ docker run -d --net=cluster --name=ndb2 --ip=192.168.0.4 mysql/mysql-cluster ndb
 docker run -d --net=cluster --name=mysql1 --ip=192.168.0.10 -e MYSQL_ROOT_PASSWORD=password mysql/mysql-cluster mysqld
 ```
 
-![MySQL集群](../../Images/Docker/使用MySQL/MySQL集群.png)
+![MySQL集群](../Images/Docker/使用MySQL/MySQL集群.png)
 
 此时，MySQL 集群就已经启动了，我们可以利用`ndb_mgm`来管理集群。
 
@@ -125,7 +125,7 @@ docker run -it --net=cluster mysql/mysql-cluster ndb_mgm
 
 在显示`ndb_mgm>`后键入`show`就可以看到该集群信息。
 
-![集群信息](../../Images/Docker/使用MySQL/集群信息.png)
+![集群信息](../Images/Docker/使用MySQL/集群信息.png)
 
 ## 使用 Docker Compose 创建
 
@@ -198,7 +198,7 @@ networks:
 
 比如，极有可能碰到的权限问题。
 
-> host ‘192.168.0.1’ is not allowed to connect to this MYSQL server.
+    host ‘192.168.0.1’ is not allowed to connect to this MYSQL server.
 
 这是因为我们的 MySQL 集群运行在子网中，我们在本地环境中去访问的话，就相当于远程访问。但是 MySQL 的默认策略是不允许远程登录的，所以我们需要进入 MySQL 容器，添加远程访问的权限。
 

@@ -1,8 +1,8 @@
 # ABP 框架踩坑记录
 
-> [ASP.NET Boilerplate](https://aspnetboilerplate.com/)是一个专用于现代 Web 应用程序的通用应用程序框架。
->
-> 它使用了你已经熟悉的工具，并根据它们实现最佳实践。
+[ASP.NET Boilerplate](https://aspnetboilerplate.com/)是一个专用于现代 Web 应用程序的通用应用程序框架。
+
+它使用了你已经熟悉的工具，并根据它们实现最佳实践。
 
 ## 开始前的准备
 
@@ -33,10 +33,3 @@
 3. 作为初学者很多问题的解决方案也许还欠考虑，希望能与大家进一步交流。
 
    > 邮箱: [mytyiluo@outlook.com](mailto:mytyiluo@outlook.com)
-
-## 文章目录
-
-- [使用 MySQL](使用MySQL.md)
-- [配置 User Secrets](配置UserSecrets.md)
-- [配置数据库表前缀](配置数据库表前缀.md)
-- [添加实体](添加实体.md)

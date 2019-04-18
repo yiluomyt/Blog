@@ -32,7 +32,7 @@ Hexo 是一款基于 Node.js 开发的博客框架，可将 Markdown 文本渲�
 
 ## 构建博客
 
-```shell
+```powershell
 # 初始化Hexo，demo为你的文件夹名
 hexo init demo
 cd demo
@@ -62,7 +62,7 @@ code .
 
 那我们就从 Hexo 本身来找解决方案，文章的排序是由`hexo-generate-index`这个组件决定的，其中`lib/generator.js`中这样一行代码：
 
-```js
+```javascript
 var posts = locals.posts.sort(config.index_generator.order_by);
 ```
 
@@ -72,7 +72,7 @@ var posts = locals.posts.sort(config.index_generator.order_by);
 
 > 需要安装`thenby`库，npm install thenby 或者 yarn add thenby
 
-```js
+```javascript
 var firstBy = require("thenby");
 
 // ...
@@ -90,7 +90,7 @@ var posts = locals.posts.data.sort(firstBy("sticky", -1).thenBy("updated", -1));
 
 通过查找资料，我们可以在`layout/_custom/head.swig`中添加如下信息来定义元数据：
 
-{% raw %}
+<!-- {% raw %} -->
 
 ```html
 <meta itemprop="name" content="{{ page.title | default(title) }}" />
@@ -102,13 +102,13 @@ var posts = locals.posts.data.sort(firstBy("sticky", -1).thenBy("updated", -1));
 />
 ```
 
-{% endraw %}
+<!-- {% endraw %} -->
 
 其中所涉及到的变量可以在[文档](https://hexo.io/zh-cn/api/locals)中找到。
 
 然后，我们需要转到`layout/_layout.swig`文件，修改如下内容：
 
-{% raw %}
+<!-- {% raw %} -->
 
 ```html
 <html class="{{ html_class | lower }}" lang="{{ config.language }}">
@@ -123,6 +123,6 @@ var posts = locals.posts.data.sort(firstBy("sticky", -1).thenBy("updated", -1));
 </html>
 ```
 
-{% endraw %}
+<!-- {% endraw %} -->
 
 > 在`hexo g`命令中，hexo 会对部分内容做缓存处理，而`hexo s`不会，这点坑了我不少时间。

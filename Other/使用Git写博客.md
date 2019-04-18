@@ -53,7 +53,7 @@ date: 2018-05-13
 
 命令如下：
 
-```shell
+```powershell
 git remote set-url --add origin repo-url
 ```
 

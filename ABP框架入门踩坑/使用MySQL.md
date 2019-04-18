@@ -11,14 +11,14 @@ date: 2019-01-25
 
 因为我自用的服务器只是腾讯云 1 核 1G 的学生机，不方便装 SQL Server，所以转而 MySQL。
 
-> 这里使用的 MySQL 版本号为 8.0。
+**这里使用的 MySQL 版本号为 8.0。**
 
 ## 解决方案
 
 1. 删除 Qincai.EntityFrameCore 项目中现有的针对 SQL Server 的迁移文件，即 Migrations 文件夹。
-2. 为 Qincai.EntityFrameCore 项目，添加`Pomelo.EntityFrameworkCore.MySql`NuGet 引用，并删除对`Microsoft.EntityFrameworkCore.SqlServer`的引用。
+2. 为 Qincai.EntityFrameCore 项目，添加 Pomelo.EntityFrameworkCore.MySqlNuGet 引用，并删除对 Microsoft.EntityFrameworkCore.SqlServer 的引用。
 
-   > Orcale 官方也有提供`MySql.Data.EntityFrameworkCore`，但在之前我使用的时候（18 年 10 月）还存在一些 Bug，不知道现在有没有修复。如果有知道的同学，可以告知我一下。
+   > Orcale 官方也有提供 MySql.Data.EntityFrameworkCore ，但在之前我使用的时候（18 年 10 月）还存在一些 Bug，不知道现在有没有修复。如果有知道的同学，可以告知我一下。
 
 3. 在 Qincai.Web.Host 项目中的 appsettings.json 中修改连接字符串。
 

@@ -10,8 +10,7 @@ date: 2018-12-09
 
 ## Swagger 简介
 
-Swagger 是一个开源软件框架，可帮助开发人员设计，构建，记录和使用 RESTful Web 服务。
-
+Swagger 是一个开源软件框架，可帮助开发人员设计，构建，记录和使用 RESTful Web 服务。\
 其中，Swagger 可以生成一个交互式的 API 控制台，以便于快速测试 API。
 
 从个人角度讲，Swagger 对于前后端分离的小团队来说是非常有帮助的。尤其是像我们这种平时没写文档习惯的人来说，Swagger 能根据代码自动生成文档可谓是一大福音，再也不用被人追着问这 API 到底是怎么用的。
@@ -54,7 +53,7 @@ app.UseSwaggerUI(c =>
 
 随后运行，打开浏览器`host/swagger`即可看到所生成的 API 文档。
 
-![Swagger UI](../Images/Other/Swagger导出API/Swagger%20UI.jpg)
+![Swagger UI](../Images/Other/Swagger导出API/SwaggerUI.jpg)
 
 若还有不清楚的，可以参考微软官方的[文档](https://docs.microsoft.com/zh-cn/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.1&tabs=visual-studio)。
 
@@ -198,13 +197,10 @@ public class AuthorizationHeaderOperationFilter : IOperationFilter
 
 随后，就是查找资料了，确实 Swagger 有这方面的[支持](https://github.com/swagger-api/swagger-codegen)，其中官方[关于 Js 的库](https://github.com/swagger-api/swagger-js)是完全动态的，但可惜不适用于小程序。然后，就发现了第三方的[swagger-js-codegen](https://github.com/wcandillon/swagger-js-codegen)，可用于生成静态的 Js 代码，且提供了自定义模板的功能。网上也不少基于这个库的其他模板，比如说`axios`之类的，但没有适用于微信小程序的，不过问题不大，模板是基于`mustache`的，动手撸就是了。
 
-模板代码有点长就不在这里放出了，大家还请移步[GitHub](https://github.com/yiluomyt/swagger-wxopen-codegen-template)。
+模板代码有点长就不在这里放出了，大家还请移步[GitHub](https://github.com/yiluomyt/swagger-wxopen-codegen-template)。\
+这里我就简单说下大致思路，模板本身是基于原来的 nodejs 模板改的，我们所需做的就是将 http 请求部分的代码改为使用`wx.request`，如下简单的封装即可:
 
-这里我就简单说下大致思路，
-
-模板本身是基于原来的 nodejs 模板改的，我们所需做的就是将 http 请求部分的代码改为使用`wx.request`，如下简单的封装即可:
-
-```js
+```javascript
 /**
 * HTTP Request
 * @method
@@ -234,11 +230,10 @@ request(method, url, parameters, data, headers){
 }
 ```
 
-对应 method 的话，基本没怎么改，只根据微信小程序所有参数都是传递给 data，做了点简化。
-
+对应 method 的话，基本没怎么改，只根据微信小程序所有参数都是传递给 data，做了点简化。\
 对于认证部分，根据我们自己的需求，换成了这样的实现：
 
-```js
+```javascript
 new Promise((resolve, reject) => {
   this.authenticate().then(token => {
     headers["Authorization"] = "Bearer " + token;
@@ -253,7 +248,7 @@ new Promise((resolve, reject) => {
 
 导出后，在小程序中的使用就类似于:
 
-```js
+```javascript
 import API from "./api.js";
 
 api = new API("http://localhost:5000");

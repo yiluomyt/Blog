@@ -80,7 +80,7 @@ private static IConfigurationRoot BuildConfiguration(string path, string environ
 }
 ```
 
-乍一看好像没问题，但是注意，我刚才说了 AppConfigurations 是属于 Qincai.Core 项目，即根据默认的配置，typeof(AppConfigurations).GetAssembly()获取到的是 Qincai.Core.dll 下的程序集。
+乍一看好像没问题，但是注意，我刚才说了 AppConfigurations 是属于 Qincai.Core 项目，即根据默认的配置，`typeof(AppConfigurations).GetAssembly()`获取到的是 Qincai.Core.dll 下的程序集。
 
 也就是说，这里添加的 User Secrets 是根据 Qincai.Core.csproj 中定义的 UserSecretsId，而不是 Qincai.Web.Host.csproj 中定义的。
 
@@ -98,14 +98,14 @@ private static IConfigurationRoot BuildConfiguration(string path, string environ
 
 到这里，我们已经可以在程序运行时成功读取到 User Secrets，但是在数据库迁移过程中，还是会报错:
 
-```shell
+```powershell
 System.ArgumentNullException: Value cannot be null.
 Parameter name: connectionString
 ```
 
 让我们打开 ef 工具的[详细输出`-v`](https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet#common-options)来看一看，其中有这么一段输出：
 
-```shell
+```
 Finding DbContext classes...
 Finding IDesignTimeDbContextFactory implementations...
 Finding application service provider...

@@ -28,7 +28,7 @@ dotnet run
 
 打开浏览器键入[http://localhost:5000/api/values](http://localhost:5000/api/values)，我们可以看到返回的样例。
 
-![docker-3-0](../../Images/Docker/容器化ASPNETCore应用/api样例.png)
+![docker-3-0](../Images/Docker/容器化ASPNETCore应用/api样例.png)
 
 显然，和之前的 python 应用不同，.net core 需要经过 build 才能运行。因此，我们可以先拉取完整的 SDK 镜像`microsoft/dotnet:2.1-sdk`来进行编译，以免因为在不同环境下 build 产生的问题。而在实际运行过程中，考虑到镜像容量以及运行时优化，我们应该采用专门的 runtime 镜像`microsoft/dotnet:2.1-aspnetcore-runtime`。
 
