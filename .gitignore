@@ -1,5 +1,2 @@
-/_book
-/node_modules
-
 # 忽略ijupyter notebook的临时文件
 .ipynb_checkpoints

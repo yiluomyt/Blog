@@ -90,8 +90,6 @@ var posts = locals.posts.data.sort(firstBy("sticky", -1).thenBy("updated", -1));
 
 通过查找资料，我们可以在`layout/_custom/head.swig`中添加如下信息来定义元数据：
 
-<!-- {% raw %} -->
-
 ```html
 <meta itemprop="name" content="{{ page.title | default(title) }}" />
 <meta itemprop="image" content="{{ url_for('/uploads/logo-white.png') }}" />
@@ -102,13 +100,9 @@ var posts = locals.posts.data.sort(firstBy("sticky", -1).thenBy("updated", -1));
 />
 ```
 
-<!-- {% endraw %} -->
-
 其中所涉及到的变量可以在[文档](https://hexo.io/zh-cn/api/locals)中找到。
 
 然后，我们需要转到`layout/_layout.swig`文件，修改如下内容：
-
-<!-- {% raw %} -->
 
 ```html
 <html class="{{ html_class | lower }}" lang="{{ config.language }}">
@@ -122,7 +116,5 @@ var posts = locals.posts.data.sort(firstBy("sticky", -1).thenBy("updated", -1));
   </head>
 </html>
 ```
-
-<!-- {% endraw %} -->
 
 > 在`hexo g`命令中，hexo 会对部分内容做缓存处理，而`hexo s`不会，这点坑了我不少时间。
